@@ -27,7 +27,7 @@ class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
     public static function form(Form $form): Form
     {
@@ -35,10 +35,19 @@ class EmployeeResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        TextInput::make('first_name')->required(),
-                        TextInput::make('last_name')->required(),
-                        DatePicker::make('birth_date')->required(),
-                        DatePicker::make('date_hired')->required()
+                        TextInput::make('first_name')
+                            ->required()
+                            ->maxLength(255),
+                        
+                        TextInput::make('last_name')
+                            ->required()
+                            ->maxLength(255),
+                        
+                        DatePicker::make('birth_date')
+                            ->required(),
+                        
+                        DatePicker::make('date_hired')
+                            ->required()
                     ])->columns(2),
                 
                 Section::make('Address')->schema([
@@ -61,9 +70,9 @@ class EmployeeResource extends Resource
                                 }
                                 return $country->states->pluck('name','id');
                             })
+                            ->required()
                             ->reactive()
                             ->afterStateUpdated(fn (callable $set) => $set('city_id',null))
-                            ->required()
                             ->columnSpan(2),
                         
                         Select::make('city_id')
@@ -76,9 +85,21 @@ class EmployeeResource extends Resource
                             })
                             ->required()
                             ->columnSpan(2),
-                        Select::make('departement_id')->relationship('departement','name')->required()->columnSpan(2),
-                        TextInput::make('address')->required()->columnSpan(3),
-                        TextInput::make('zip_code')->required()->columnSpan(1),
+
+                        Select::make('departement_id')
+                            ->relationship('departement','name')
+                            ->required()
+                            ->columnSpan(2),
+
+                        TextInput::make('address')
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpan(3),
+                        
+                        TextInput::make('zip_code')
+                            ->required()
+                            ->maxLength(5)
+                            ->columnSpan(1),
                     ])->columns(4),
                     
             ]);
