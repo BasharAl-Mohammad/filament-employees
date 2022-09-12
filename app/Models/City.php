@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\State;
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class City extends Model
 {
@@ -13,7 +15,7 @@ class City extends Model
 
     public function state()
     {
-        return $this->belongsTo(state::class);
+        return $this->belongsTo(State::class);
     }
 
     public function employees()

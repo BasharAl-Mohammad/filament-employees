@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Employee extends Model
 {
@@ -22,23 +23,23 @@ class Employee extends Model
         'date_hired'
     ];
 
-    public function counrty()
+    public function country()
     {
-        return $this->belongTo(Country::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function state()
     {
-        return $this->belongTo(State::class);
+        return $this->belongsTo(State::class);
     }
 
     public function city()
     {
-        return $this->belongTo(City::class);
+        return $this->belongsTo(City::class);
     }
 
     public function departement()
     {
-        return $this->belongTo(Departement::class);
+        return $this->belongsTo(Departement::class);
     }
 }
