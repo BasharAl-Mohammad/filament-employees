@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CityResource\RelationManagers\EmployeesRelationManager;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Departement;
@@ -62,7 +63,7 @@ class DepartementResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            EmployeesRelationManager::class,
         ];
     }
     

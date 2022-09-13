@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CountryResource\RelationManagers\EmployeesRelationManager;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\State;
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\StateResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\StateResource\RelationManagers;
+use App\Filament\Resources\StateResource\RelationManagers\CitiesRelationManager;
+use App\Models\Employee;
 
 class StateResource extends Resource
 {
@@ -66,7 +69,8 @@ class StateResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            EmployeesRelationManager::class,
+            CitiesRelationManager::class,
         ];
     }
     
