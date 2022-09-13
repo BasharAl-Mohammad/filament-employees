@@ -1,7 +1,8 @@
 <?php
-
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\EmployeeResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/employees',function (Request $request) {
+    $employees = Employee::orderby('last_name')->get();
+    return EmployeeResource::collection($employees);
 });

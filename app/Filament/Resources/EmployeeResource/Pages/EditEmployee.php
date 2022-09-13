@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\EmployeeResource\Pages;
 
-use App\Filament\Resources\EmployeeResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\EmployeeResource;
+use App\Filament\Resources\EmployeeResource\Widgets\EmployeeStatsOverview;
 
 class EditEmployee extends EditRecord
 {
