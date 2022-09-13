@@ -16,4 +16,11 @@ class EditEmployee extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            EmployeeStatsOverview::class,
+        ];
+    }
 }

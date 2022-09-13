@@ -9,4 +9,11 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateEmployee extends CreateRecord
 {
     protected static string $resource = EmployeeResource::class;
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            EmployeeStatsOverview::class,
+        ];
+    }
 }
