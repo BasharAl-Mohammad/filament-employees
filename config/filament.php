@@ -142,7 +142,7 @@ return [
         'register' => [
             Widgets\AccountWidget::class,
             Widgets\FilamentInfoWidget::class,
-            EmployeeStatsOverview::class,
+            // EmployeeStatsOverview::class,
         ],
     ],
 

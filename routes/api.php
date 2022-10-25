@@ -3,6 +3,7 @@ use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\EmployeeResource;
+use App\Http\Controllers\Api\V1\EmployeeApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/employees',function (Request $request) {
-    $employees = Employee::orderby('last_name')->get();
-    return EmployeeResource::collection($employees);
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1'], function () {
+    // Articles
+    Route::get('employees', [EmployeeApiController::class, 'index'])->name('employees.index');
+    Route::get('employees/{employee}', [EmployeeApiController::class, 'show'])->name('employees.show');
 });

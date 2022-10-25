@@ -13,7 +13,7 @@ class CreateEmployee extends CreateRecord
     protected function getHeaderWidgets(): array
     {
         return [
-            EmployeeStatsOverview::class,
+            // EmployeeStatsOverview::class,
         ];
     }
 }

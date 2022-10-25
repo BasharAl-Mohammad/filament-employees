@@ -38,8 +38,8 @@ class Employee extends Model
         return $this->belongsTo(City::class);
     }
 
-    public function departement()
+    public function departements()
     {
-        return $this->belongsTo(Departement::class);
+        return $this->belongsToMany(Departement::class, 'employee_departements', 'employee_id', 'departement_id');
     }
 }

@@ -17,18 +17,23 @@ use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Actions\AttachAction;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\EmployeeResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
-use App\Filament\Resources\EmployeeResource\Widgets\EmployeeStatsOverview;
+// use App\Filament\Resources\EmployeeResource\Widgets\EmployeeStatsOverview;
+use App\Filament\Resources\EmployeeResource\RelationManagers\DepartementsRelationManager;
+use App\Models\Departement;
+use Closure;
 
 class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+
 
     public static function form(Form $form): Form
     {
@@ -87,10 +92,12 @@ class EmployeeResource extends Resource
                             ->required()
                             ->columnSpan(2),
 
-                        Select::make('departement_id')
-                            ->relationship('departement','name')
-                            ->required()
-                            ->columnSpan(2),
+                        
+
+                        // Select::make('departement_id')
+                        //     ->relationship('departement','name')
+                        //     ->required()
+                        //     ->columnSpan(2),
 
                         TextInput::make('address')
                             ->required()
@@ -112,16 +119,18 @@ class EmployeeResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('first_name')->sortable()->searchable(),
-                TextColumn::make('last_name')->sortable()->searchable(),
-                TextColumn::make('departement.name')->sortable()->searchable(),
+                TextColumn::make('last_name')->sortable()->searchable(),    
                 TextColumn::make('date_hired')->date(),
                 TextColumn::make('created_at')->dateTime()
             ])
             ->filters([
-                SelectFilter::make('departement')->relationship('departement','name')
+                // SelectFilter::make('departement')->relationship('departement','name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                AttachAction::make()
+                    ->recordTitleAttribute('name')
+                    ->preloadRecordSelect(true)
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -131,14 +140,14 @@ class EmployeeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            DepartementsRelationManager::class,
         ];
     }
 
     public static function getWidgets(): array
     {
         return [
-            EmployeeStatsOverview::class,
+            // EmployeeStatsOverview::class,
         ];
     }
     
